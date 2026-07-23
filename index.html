@@ -44,10 +44,10 @@
 
   /* NAV */
   header{position:sticky;top:0;z-index:50;transition:background .3s,box-shadow .3s}
-  header.scrolled{background:rgba(254,250,243,.9);backdrop-filter:blur(12px);box-shadow:0 1px 0 rgba(16,60,64,.08)}
-  nav{display:flex;align-items:center;justify-content:space-between;height:76px}
-  .logo{display:flex;align-items:center;gap:.6rem;font-family:'Fraunces';font-weight:700;font-size:1.25rem;color:#fff;transition:color .3s}
-  header.scrolled .logo{color:var(--ink)}
+  header.scrolled,header.menu-open{background:rgba(254,250,243,.95);backdrop-filter:blur(12px);box-shadow:0 1px 0 rgba(16,60,64,.08)}
+  nav{display:flex;align-items:center;justify-content:space-between;height:72px}
+  .logo{display:flex;align-items:center;gap:.6rem;font-family:'Fraunces';font-weight:700;font-size:1.25rem;color:#fff;transition:color .3s;text-shadow:0 1px 10px rgba(0,0,0,.28)}
+  header.scrolled .logo,header.menu-open .logo{color:var(--ink);text-shadow:none}
   .logo-mark{width:34px;height:34px;border-radius:50%;background:radial-gradient(circle at 35% 30%,var(--sun),var(--coral) 70%);box-shadow:0 0 0 3px rgba(255,255,255,.3) inset;flex:none}
   .nav-links{display:flex;gap:2rem;align-items:center}
   .nav-links a{color:rgba(255,255,255,.95);font-weight:500;font-size:.96rem;transition:color .3s}
@@ -55,8 +55,8 @@
   header.scrolled .nav-links a:hover{color:var(--ocean)}
   .nav-links a:hover{color:#fff}
   .nav-cta{padding:.6rem 1.25rem !important}
-  .menu-btn{display:none;background:none;border:none;color:#fff;font-size:1.6rem;cursor:pointer}
-  header.scrolled .menu-btn{color:var(--ink)}
+  .menu-btn{display:none;width:44px;height:44px;border-radius:12px;background:rgba(10,50,58,.28);border:1px solid rgba(255,255,255,.28);color:#fff;font-size:1.4rem;line-height:1;cursor:pointer;align-items:center;justify-content:center;backdrop-filter:blur(4px);-webkit-tap-highlight-color:transparent;transition:background .3s,color .3s,border-color .3s}
+  header.scrolled .menu-btn,header.menu-open .menu-btn{color:var(--ink);background:rgba(23,58,63,.08);border-color:rgba(23,58,63,.14)}
 
   /* HERO — full beach scene */
   .hero{position:relative;min-height:100vh;display:flex;align-items:center;margin-top:-76px;padding-top:76px;overflow:hidden;color:#fff;
@@ -202,10 +202,11 @@
   .foot-bottom{border-top:1px solid rgba(255,255,255,.12);padding-top:1.5rem;display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;font-size:.85rem;position:relative;z-index:2}
 
   @media(max-width:860px){
-    .nav-links{display:none;position:absolute;top:76px;left:0;right:0;background:var(--cream);flex-direction:column;padding:1.5rem 24px;box-shadow:var(--shadow);gap:1.2rem}
+    .nav-links{display:none;position:absolute;top:72px;left:0;right:0;background:rgba(254,250,243,.98);backdrop-filter:blur(12px);flex-direction:column;padding:.5rem 20px 1.25rem;box-shadow:var(--shadow);gap:0;border-top:1px solid rgba(16,60,64,.06)}
     .nav-links.open{display:flex}
-    .nav-links a{color:var(--ink) !important}
-    .menu-btn{display:block}
+    .nav-links a{color:var(--ink) !important;width:100%;padding:1rem .25rem;font-size:1.08rem;font-weight:600;border-bottom:1px solid rgba(16,60,64,.08)}
+    .nav-links .btn{color:#fff !important;justify-content:center;margin-top:1rem;padding:1rem 1.25rem !important;border-bottom:none;font-size:1.02rem}
+    .menu-btn{display:flex}
     .hours-card{display:none}
     .palm{opacity:.55}
     .visit-grid{grid-template-columns:1fr}
@@ -231,7 +232,7 @@
         <a href="#visit">Visit</a>
         <a href="https://clientportal.tantrack.com?uid=R42uRRGXlbNEe4Cq1NfJUQ==" target="_blank" rel="noopener" class="btn btn-primary nav-cta">Book Online</a>
       </div>
-      <button class="menu-btn" id="menuBtn" aria-label="Menu">☰</button>
+      <button class="menu-btn" id="menuBtn" aria-label="Menu" aria-controls="navLinks" aria-expanded="false">☰</button>
     </nav>
   </div>
 </header>
@@ -455,8 +456,9 @@
   const header=document.getElementById('top');
   addEventListener('scroll',()=>header.classList.toggle('scrolled',scrollY>40));
   const btn=document.getElementById('menuBtn'),links=document.getElementById('navLinks');
-  btn.addEventListener('click',()=>links.classList.toggle('open'));
-  links.addEventListener('click',e=>{if(e.target.tagName==='A')links.classList.remove('open')});
+  function setMenu(o){links.classList.toggle('open',o);header.classList.toggle('menu-open',o);btn.textContent=o?'✕':'☰';btn.setAttribute('aria-expanded',o)}
+  btn.addEventListener('click',()=>setMenu(!links.classList.contains('open')));
+  links.addEventListener('click',e=>{if(e.target.tagName==='A')setMenu(false)});
 </script>
 </body>
 </html>
