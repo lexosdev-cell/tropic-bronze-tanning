@@ -60,15 +60,12 @@
 
   /* HERO — full beach scene */
   .hero{position:relative;min-height:100vh;display:flex;align-items:center;margin-top:-76px;padding-top:76px;overflow:hidden;color:#fff;
-    background:linear-gradient(180deg,#bff0f7 0%,#5fd2e0 30%,#12b5c6 55%,#0aa0b5 74%,#0a8ea5 82%)}
-  /* ocean shimmer */
-  .hero::before{content:"";position:absolute;left:0;right:0;top:55%;bottom:16%;pointer-events:none;opacity:.35;
-    background:repeating-linear-gradient(100deg,rgba(255,255,255,.5) 0 2px,transparent 2px 26px);
-    -webkit-mask:linear-gradient(180deg,transparent,#000 40%,#000 70%,transparent);mask:linear-gradient(180deg,transparent,#000 40%,#000 70%,transparent)}
+    background:linear-gradient(95deg,rgba(8,74,90,.78),rgba(9,110,124,.34) 60%,rgba(120,220,230,.15)),
+      url('https://images.pexels.com/photos/1591370/pexels-photo-1591370.jpeg?auto=compress&cs=tinysrgb&w=1800') center/cover no-repeat}
   .sun-orb{position:absolute;right:9%;top:14%;width:170px;height:170px;border-radius:50%;
     background:radial-gradient(circle at 45% 45%,#fff6d6,#ffcf6b 55%,rgba(255,207,107,0) 72%);animation:float 8s ease-in-out infinite;z-index:1}
   @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(18px)}}
-  .palm{position:absolute;bottom:8%;font-size:clamp(90px,15vw,190px);line-height:1;z-index:2;filter:drop-shadow(0 12px 20px rgba(10,60,70,.25));transform-origin:bottom center}
+  .palm{display:none;position:absolute;bottom:8%;font-size:clamp(90px,15vw,190px);line-height:1;z-index:2;filter:drop-shadow(0 12px 20px rgba(10,60,70,.25));transform-origin:bottom center}
   .palm.left{left:-8px;transform:scaleX(-1) rotate(-2deg);animation:sway 7s ease-in-out infinite}
   .palm.right{right:-6px;animation:sway 6s ease-in-out infinite reverse}
   @keyframes sway{0%,100%{transform:rotate(-2deg)}50%{transform:rotate(3deg)}}
@@ -160,14 +157,15 @@
 
   /* GALLERY */
   .gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;grid-auto-rows:180px}
-  .gtile{border-radius:18px;overflow:hidden;position:relative;background-size:cover;background-position:center}
-  .g1{grid-row:span 2;background:linear-gradient(135deg,#12c1c9,#0a7f92)}
-  .g2{background:linear-gradient(135deg,#ffb03a,#ff6f5e)}
-  .g3{background:linear-gradient(135deg,#8fe3d8,#12c1c9)}
-  .g4{grid-column:span 2;background:linear-gradient(135deg,#0f7a5f,#16b8a0)}
-  .g5{background:linear-gradient(135deg,#ffcf6b,#ffb03a)}
-  .g6{background:linear-gradient(135deg,#0a7f92,#26c6da)}
-  .gtile span{position:absolute;bottom:14px;left:16px;color:#fff;font-family:'Fraunces';font-weight:600;font-size:1.05rem;text-shadow:0 2px 12px rgba(0,0,0,.35)}
+  .gtile{border-radius:18px;overflow:hidden;position:relative;background-size:cover;background-position:center;
+    background-image:linear-gradient(180deg,rgba(0,0,0,0) 45%,rgba(0,0,0,.6)),var(--img)}
+  .g1{grid-row:span 2;--img:url('https://images.pexels.com/photos/6899549/pexels-photo-6899549.jpeg?auto=compress&cs=tinysrgb&w=800')}
+  .g2{--img:url('https://images.pexels.com/photos/7195809/pexels-photo-7195809.jpeg?auto=compress&cs=tinysrgb&w=800')}
+  .g3{--img:url('https://images.pexels.com/photos/6899544/pexels-photo-6899544.jpeg?auto=compress&cs=tinysrgb&w=800')}
+  .g4{grid-column:span 2;--img:url('https://images.pexels.com/photos/4860972/pexels-photo-4860972.jpeg?auto=compress&cs=tinysrgb&w=1200')}
+  .g5{--img:url('https://images.pexels.com/photos/8158551/pexels-photo-8158551.jpeg?auto=compress&cs=tinysrgb&w=800')}
+  .g6{--img:url('https://images.pexels.com/photos/5163367/pexels-photo-5163367.jpeg?auto=compress&cs=tinysrgb&w=800')}
+  .gtile span{position:absolute;bottom:14px;left:16px;color:#fff;font-family:'Fraunces';font-weight:600;font-size:1.05rem;text-shadow:0 2px 12px rgba(0,0,0,.55)}
 
   /* BOOK ONLINE band */
   #book{position:relative}
